@@ -1,11 +1,21 @@
-function solution(k, tangerine) {
-    // 가독성을 위해 단계별로 구분하여 재선언 및 재할당하였던 코드를 한 줄로 줄여 작성
-    
-    // tangerine 순회하며 요소별 개수를 map에 기록
+function solution(k, tangerine) { 
     const map = new Map();
     for (let el of tangerine) map.set(el, (map.get(el)??0) + 1);
     
-    // 정렬 1번 기준: 수량 많은 순, 2번 기준: 낮은 품질순
-    // set으로 중복 제거
-    return new Set(tangerine.sort((a,b) => map.get(b)-map.get(a)||a-b).slice(0,k)).size;
+    tangerine.sort((a,b) => map.get(b)-map.get(a)||a-b);
+    
+    // slice해서 set 만드는 대신 바로 순회하면서 k개까지만 연산
+    // 이전 요소(previous)와 다른 요소인 경우 count++
+    let previous = 0;
+    let count = 0;
+    for (let i=0;i<tangerine.length;i++){
+        if (i === k){
+            return count;
+        }
+        if (tangerine[i] !== previous){
+            previous = tangerine[i];
+            count++;
+        }
+    }
+    return count;
 }
