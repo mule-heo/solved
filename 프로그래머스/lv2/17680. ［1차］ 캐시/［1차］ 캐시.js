@@ -5,13 +5,14 @@ function solution(cacheSize, cities) {
     let time = 0;
     for (let i=0;i<cities.length;i++){
         let city = cities[i].toLowerCase();
-        if (cache.includes(city)){
-            time++;
-            cache.splice(cache.indexOf(city), 1);
+        let index = cache.indexOf(city);
+        if (index+1){
+            cache.splice(index, 1);
             cache.push(city);
+            time++;
             continue;
         } else {
-            if (cacheSize <= cache.length){
+            if (cacheSize === cache.length){
                 cache.shift();
                 cache.push(city);
                 time += 5;
