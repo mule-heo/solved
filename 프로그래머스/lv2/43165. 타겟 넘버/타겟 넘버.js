@@ -1,12 +1,12 @@
 function solution(numbers, target) {
+    let count = 0;
     function add(idx, acc){
-        if (idx === numbers.length) return acc === target;
+        if (idx === numbers.length) count += +(acc === target);
         else {
-            let result = 0;
-            result += add(idx+1, acc + numbers[idx]);
-            result += add(idx+1, acc - numbers[idx]);
-            return result;
+            add(idx+1, acc + numbers[idx]);
+            add(idx+1, acc - numbers[idx]);
         }
     }
-    return add(0, 0);
+    add(0,0);
+    return count;
 }
