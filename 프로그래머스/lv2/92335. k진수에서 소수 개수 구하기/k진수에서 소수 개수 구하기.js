@@ -11,22 +11,7 @@ function solution(n, k) {
             for (let j=2;j<=sqrt;j++){
                 if (num % j === 0) continue findNext;
                 }
-            
-            if (i === 0 && string.length === 1){
-                return 1;     // P
-            }
-            if (i === 0){
-                count++; // P0
-                continue;
-            }
-            if (i > 0 && i < string.length-1){
-                count++; // 0P0
-                continue;
-            }
-            if (i === string.length-1){
-                count++; // 0P
-                continue;
-            }
+            count++;
         }
     }
     return count;
